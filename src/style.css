@@ -1,0 +1,164 @@
+:root {
+  --red: #e42a21;
+  --font: "Fredoka", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  background: var(--red);
+  overflow-x: hidden;
+}
+
+.stage {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* Each layer is one full "screen" of the brand: a color scheme + the logo + copy.
+   The tap-to-swap effect stacks a second layer on top and reveals it with a circle. */
+.layer {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vh, 32px);
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--fg);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot) 2px, transparent 2.5px);
+  background-size: 26px 26px;
+}
+
+.layer[data-theme="red"] {
+  --bg: var(--red);
+  --fg: #ffffff;
+  --dot: rgba(255, 255, 255, 0.14);
+  --logo-ink: #ffffff;
+  --logo-accent: #ffffff;
+  --logo-swirl: var(--red);
+}
+
+.layer[data-theme="white"] {
+  --bg: #ffffff;
+  --fg: var(--red);
+  --dot: rgba(228, 42, 33, 0.1);
+  --logo-ink: var(--red);
+  --logo-accent: var(--red);
+  --logo-swirl: #ffffff;
+}
+
+/* Hidden until the intro animates them in (avoids a flash of the full logo). */
+.letter,
+.disc,
+.swirl,
+.reveal,
+.big-tomato {
+  opacity: 0;
+}
+
+/* Big tomato shown first during the intro, centered over the screen. */
+.big-tomato {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: min(62vw, 320px);
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.big-disc {
+  fill: var(--logo-accent);
+}
+
+.big-swirl {
+  fill: var(--logo-swirl);
+}
+
+.logo-btn {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 24px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.logo-btn:focus-visible {
+  outline: 3px dashed currentColor;
+  outline-offset: 14px;
+}
+
+.logo {
+  display: block;
+  width: min(84vw, 560px);
+  height: auto;
+  overflow: visible;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo-btn:hover .logo {
+  transform: scale(1.03) rotate(-2deg);
+}
+
+.logo-btn:active .logo {
+  transform: scale(0.94);
+}
+
+.letter {
+  fill: var(--logo-ink);
+}
+
+.disc {
+  fill: var(--logo-accent);
+}
+
+.swirl {
+  fill: var(--logo-swirl);
+}
+
+.tagline {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.55em 1.3em;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  font-size: clamp(0.8rem, 2.6vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    transition: none;
+  }
+}
