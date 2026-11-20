@@ -9,9 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.119.2",
     "gsap": "^3.15.0"
   },
   "devDependencies": {
+    "supabase": "^3.2.0",
     "typescript": "^5.9.3",
     "vite": "^8.3.4"
   }
