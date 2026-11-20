@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# local-only env overrides (never commit secrets here)
+*.local
+.env*.local
+
+# supabase local runtime artifacts (keep config.toml, migrations, seed.sql)
+supabase/.temp/
+supabase/.branches/
+
+# scratch
+_to_delete/
+
+# os
+.DS_Store
